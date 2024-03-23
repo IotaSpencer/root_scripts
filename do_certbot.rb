@@ -23,7 +23,7 @@ certbot certonly \
 HEREDOC
 full_tmpl = tmpl + domain_lines.join('')
 puts full_tmpl
-stdout, stderr, status = open3.capture3(full_tmpl)
+stdout, stderr, status = Open3.capture3(full_tmpl)
 
 if status.success?
   puts stdout
