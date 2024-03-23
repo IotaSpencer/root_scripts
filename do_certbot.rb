@@ -15,7 +15,7 @@ puts domain_lines
 tmpl = <<~HEREDOC
 certbot certonly \
   --dns-cloudflare \
-  --dns-cloudflare-credentials #{credentials_file} \
+  --dns-cloudflare-credentials #{credentials_file} \ 
 HEREDOC
 full_tmpl = tmpl + domain_lines.join('')
 puts full_tmpl
