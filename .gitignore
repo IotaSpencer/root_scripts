@@ -1,0 +1,22 @@
+#
+# ignore virtualenvs
+.venv/
+#
+# ignore editor configurations
+.vscode/
+.idea/
+#
+# ignore ruby junk
+Gemfile.lock
+#
+# ignore python junk
+dist/
+#
+# So configuration files don't get pulled in
+# Secrets must stay secret
+/*.cfg
+/*.ini
+.secrets/
+/*.toml
+/*.yml
+/*.yaml
