@@ -1,9 +1,12 @@
 #! /usr/bin/env ruby
 require 'open3'
 require 'etc'
-module CertBot
+
+if Etc.getlogin == 'root'
+  require '/root/root_scripts/do_certbot_xtra/find_creds'
+else
+  require '/home/ken/root_scripts/do_certbot_xtra/find_creds'
 end
-load '/root/root_scripts/do_certbot_xtra/find_creds.rb', CertBot
 credentials_file = CertBot::Creds.new.get_creds_file
 domains = [
   '*.electrocode.net',
@@ -16,11 +19,9 @@ domains = [
 domain_lines = domains.map {|domain| "  -d '#{domain}' \\\n"}
 tmpl = <<~HEREDOC
 certbot certonly \\
---dns-cloudflare \\
---dns-cloudflare-credentials #{credentials_file} \\
---dns-cloudflare-propagation-seconds 60 \\
-
-
+  --dns-cloudflare \\
+  --dns-cloudflare-credentials #{credentials_file} \\
+  --dns-cloudflare-propagation-seconds 60 \\
 HEREDOC
 full_tmpl = tmpl + domain_lines.join('')
 puts full_tmpl
