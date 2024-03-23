@@ -13,10 +13,11 @@ domains = [
   'iotaspencer.me'
 ]
 domain_lines = domains.map {|domain| "  -d '#{domain}'\\ \n"}
-tmpl = <<~HEREDOC
+tmpl = <<~HEREDOC.chomp
 certbot certonly \
-  --dns-cloudflare \
-  --dns-cloudflare-credentials #{credentials_file} \ 
+--dns-cloudflare \
+--dns-cloudflare-credentials #{credentials_file} \
+
 HEREDOC
 full_tmpl = tmpl + domain_lines.join('')
 puts full_tmpl
