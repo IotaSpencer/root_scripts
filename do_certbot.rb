@@ -13,8 +13,6 @@ domains = [
   'iotaspencer.me'
 ]
 domain_lines = domains.map {|domain| "  -d '#{domain}'\\ \n"}
-puts domain_lines
-
 tmpl = <<~HEREDOC
 certbot certonly \
   --dns-cloudflare \

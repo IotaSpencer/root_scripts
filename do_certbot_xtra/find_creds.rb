@@ -14,11 +14,10 @@ class Creds
     credentials_file = nil
     for name, path in places_to_check
       if File.exist? File.expand_path(path)
-        outcome[name] = true
-        puts 'found secrets'
+        outcome[name] = true 
+        puts "found creds (#{name})"
       else
         outcome[name] = false
-        puts 'found cloudflare_dir'
       end
     end
     outcome_secrets = outcome[:secrets]
