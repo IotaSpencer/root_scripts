@@ -11,10 +11,12 @@ outcome = {
 
 }
 for name, path in places_to_check
-  if File.exist? path
+  if File.exist? File.expand_path(path)
     outcome[name] = true
+    puts 'found secrets'
   else
     outcome[name] = false
+    puts 'found cloudflare_dir'
   end
 end
 outcome_secrets = outcome[:secrets]
