@@ -1,5 +1,6 @@
 #! /usr/bin/env ruby
 require 'open3'
+require 'etc'
 module CertBot
 end
 load '/root/root_scripts/do_certbot_xtra/find_creds.rb', CertBot
@@ -14,25 +15,26 @@ domains = [
 ]
 domain_lines = domains.map {|domain| "  -d '#{domain}' \\\n"}
 tmpl = <<~HEREDOC
-certbot certonly \
---dns-cloudflare \
---dns-cloudflare-credentials #{credentials_file} \
---dns-cloudflare-propagation-seconds 60 \
+certbot certonly \\
+--dns-cloudflare \\
+--dns-cloudflare-credentials #{credentials_file} \\
+--dns-cloudflare-propagation-seconds 60 \\
 
 
 HEREDOC
 full_tmpl = tmpl + domain_lines.join('')
 puts full_tmpl
-stdout, stderr, status = Open3.capture3(full_tmpl)
 
-if status.success?
-  puts stdout
-else
-  abort <<~HERE
-  OUT: #{stdout}
+if Etc.getlogin == 'root'
+  stdout, stderr, status = Open3.capture3(full_tmpl)
+  if status.success?
+    puts stdout
+  else
+    abort <<~HERE
+    OUT: #{stdout}
 
-  ERR: #{stderr}
+    ERR: #{stderr}
   
-  HERE
-
+    HERE
+  end
 end
