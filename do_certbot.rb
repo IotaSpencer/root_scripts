@@ -2,7 +2,7 @@
 require 'open3'
 module CertBot
 end
-load '/root/root_scripts/do_certbot_xtra/find_creds', CertBot
+load '/root/root_scripts/do_certbot_xtra/find_creds.rb', CertBot
 domains = [
   '*.electrocode.net',
   '*.iotaspencer.me',
