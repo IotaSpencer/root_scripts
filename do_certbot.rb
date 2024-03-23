@@ -19,6 +19,7 @@ certbot certonly \
 --dns-cloudflare-credentials #{credentials_file} \
 --dns-cloudflare-propagation-seconds 60 \
 
+
 HEREDOC
 full_tmpl = tmpl + domain_lines.join('')
 puts full_tmpl
