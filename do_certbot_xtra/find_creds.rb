@@ -10,6 +10,7 @@ outcome = {
   cloudflare_dir: nil,
 
 }
+credentials_file = nil
 for name, path in places_to_check
   if File.exist? File.expand_path(path)
     outcome[name] = true
