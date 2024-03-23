@@ -1,6 +1,8 @@
 #! /usr/bin/env ruby
 require 'open3'
-require '/root/root_scripts/do_certbot_xtra/find_creds'
+module CertBot
+end
+load '/root/root_scripts/do_certbot_xtra/find_creds', CertBot
 domains = [
   '*.electrocode.net',
   '*.iotaspencer.me',
